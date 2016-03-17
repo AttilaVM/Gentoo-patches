@@ -1,0 +1,22 @@
+diff --git a/lisp/net/tramp-sh.el b/lisp/net/tramp-sh.el
+index bd7aec9..7100fd8 100644
+--- a/lisp/net/tramp-sh.el
++++ b/lisp/net/tramp-sh.el
+@@ -3865,7 +3865,7 @@ file exists and nonzero exit status otherwise."
+       ;; the prompt in /bin/bash, it must be discarded as well.
+       (tramp-send-command
+        vec (format
+-	    "exec env ENV='' HISTFILE=/dev/null PROMPT_COMMAND='' PS1=%s PS2='' PS3='' %s %s"
++	    "exec env ENV='' HISTFILE=~/.tramp-history PROMPT_COMMAND='' PS1=%s PS2='' PS3='' %s %s"
+ 	    (tramp-shell-quote-argument tramp-end-of-output)
+ 	    shell (or extra-args ""))
+        t))
+@@ -4587,7 +4587,7 @@ connection if a previous connection has died for some reason."
+ 		(delete-process p))
+ 	      (setenv "TERM" tramp-terminal-type)
+ 	      (setenv "LC_ALL" "en_US.utf8")
+-	      (setenv "HISTFILE" "/dev/null")
++	      (setenv "HISTFILE" "~/.tramp-history")
+ 	      (setenv "PROMPT_COMMAND")
+ 	      (setenv "PS1" tramp-initial-end-of-output)
+ 	      (let* ((target-alist (tramp-compute-multi-hops vec))
